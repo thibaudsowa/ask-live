@@ -16,6 +16,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ask-live": [
+        "dist/ask-live"
+      ],
+      "ask-live/*": [
+        "dist/ask-live/*"
+      ]
+    }
   }
 }

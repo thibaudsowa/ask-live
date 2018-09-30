@@ -121,6 +121,41 @@
           }
         }
       }
+    },
+    "ask-live": {
+      "root": "projects/ask-live",
+      "sourceRoot": "projects/ask-live/src",
+      "projectType": "library",
+      "prefix": "al",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ask-live/tsconfig.lib.json",
+            "project": "projects/ask-live/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ask-live/src/test.ts",
+            "tsConfig": "projects/ask-live/tsconfig.spec.json",
+            "karmaConfig": "projects/ask-live/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ask-live/tsconfig.lib.json",
+              "projects/ask-live/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ask-live-app"
