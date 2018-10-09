@@ -6,6 +6,8 @@
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/animations": "^6.1.9",
     "@angular/cdk": "^6.4.7",
-    "@angular/material": "^6.4.7"
+    "@angular/material": "^6.4.7",
+    "@angular/fire": "^5.0.2",
+    "firebase": "^5.5.3"
   }
 }
