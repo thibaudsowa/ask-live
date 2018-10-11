@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<mat-dialog-content>
+  <form>
+    <mat-form-field>
+        <textarea matInput placeholder="Question" [(ngModel)]="questionForm.subject" name="subject"></textarea>
+      </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Answwer 1" [(ngModel)]="questionForm.answer1" name="answer1"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Answwer 2" [(ngModel)]="questionForm.answer2" name="answer2"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Answwer 3" [(ngModel)]="questionForm.answer3" name="answer3"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Answwer 4" [(ngModel)]="questionForm.answer4" name="answer4"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="add()">Add</button>
+</mat-dialog-actions>

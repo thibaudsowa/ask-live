@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Question } from '../question';
+import { MatDialog } from '@angular/material';
+import { QuestionEditorComponent } from './question-editor/question-editor.component';
 
 @Component({
   selector: 'al-admin',
@@ -11,29 +13,23 @@ import { Question } from '../question';
 export class AdminComponent implements OnInit {
 
   questions: Observable<Question[]>;
-  questionForm: Question;
 
-  constructor(private db: AngularFirestore) {
-    this.reset();
+  constructor(private db: AngularFirestore,
+    public dialog: MatDialog) {
     this.questions = this.db.collection<Question>('questions').valueChanges();
   }
 
   ngOnInit() {
   }
 
-  add(): void {
-    this.db.collection<Question>('questions').add(this.questionForm);
-    this.reset();
-  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(QuestionEditorComponent, {
+      data: {type: 'new'}
+    });
 
-  reset(): void {
-    this.questionForm = {
-      subject: '',
-      answer1: '',
-      answer2: '',
-      answer3: '',
-      answer4: ''
-    };
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+    });
   }
 
 }

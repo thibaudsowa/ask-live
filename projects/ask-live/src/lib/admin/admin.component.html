@@ -1,49 +1,25 @@
-<div style="width: 50%; float: left; padding: 20px; box-sizing: border-box">
-    <mat-card>
-        <mat-card-title>Administration</mat-card-title>
-        <mat-card-subtitle>
-          <mat-form-field>
-            <textarea matInput placeholder="Question" [(ngModel)]="questionForm.subject" name="subject"></textarea>
-          </mat-form-field>
-        </mat-card-subtitle>
-        <mat-card-content>
-          <form>
-            <mat-form-field>
-              <textarea matInput placeholder="Answwer 1" [(ngModel)]="questionForm.answer1" name="answer1"></textarea>
-            </mat-form-field>
-      
-            <mat-form-field>
-              <textarea matInput placeholder="Answwer 2" [(ngModel)]="questionForm.answer2" name="answer2"></textarea>
-            </mat-form-field>
-      
-            <mat-form-field>
-              <textarea matInput placeholder="Answwer 3" [(ngModel)]="questionForm.answer3" name="answer3"></textarea>
-            </mat-form-field>
-      
-            <mat-form-field>
-              <textarea matInput placeholder="Answwer 4" [(ngModel)]="questionForm.answer4" name="answer4"></textarea>
-            </mat-form-field>
-          </form>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button color="primary" (click)="add()">Add</button>
-        </mat-card-actions>
-      </mat-card>
-</div>
+<h1 class="mat-h1">Administration</h1>
 
-<div style="width: 50%; float: left; padding: 20px; box-sizing: border-box">
-    <mat-card *ngFor="let question of questions | async">
-        <mat-card-title>{{question.subject}}</mat-card-title>
-        <mat-card-content>
-            <mat-list>
-              <mat-list-item>{{question.answer1}}</mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>{{question.answer2}}</mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>{{question.answer3}}</mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>{{question.answer4}}</mat-list-item>
-            </mat-list>
-        </mat-card-content>
-      </mat-card>
-</div>
+<button mat-button class="mat-raised-button" (click)="openDialog()"><mat-icon>add</mat-icon> Add question...</button>
+
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let question of questions | async">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{question.subject}}
+        </mat-panel-title>
+        <!-- <mat-panel-description>
+          {{question.type}}
+        </mat-panel-description> -->
+      </mat-expansion-panel-header>
+      <mat-list>
+          <mat-list-item>{{question.answer1}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>{{question.answer2}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>{{question.answer3}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>{{question.answer4}}</mat-list-item>
+        </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
