@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Question } from '../../question';
+import { Question } from '../../shared/model/question';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -10,7 +10,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class QuestionEditorComponent implements OnInit {
 
-  title: string
+  type: string;
+  title: string;
+  successButtonName: string;
   questionForm: Question;
 
   constructor(private db: AngularFirestore,
@@ -18,7 +20,13 @@ export class QuestionEditorComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.reset();
 
-    this.title = data.type === 'new' ? 'New question' : 'Edit question';
+    this.type = data.type;
+    this.title = this.type === 'new' ? 'New question' : 'Edit question';
+    this.successButtonName = this.type === 'new' ? 'Add' : 'Edit';
+
+    if(this.type === 'edit') {
+      this.questionForm = data.question;
+    }
   }
 
   ngOnInit() {
@@ -28,9 +36,18 @@ export class QuestionEditorComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  add(): void {
-    this.db.collection<Question>('questions').add(this.questionForm);
-    this.reset();
+  successButtonAction(): void {
+    let questionToSave: Question = Object.assign({}, this.questionForm);
+
+    if(this.type === 'new') {
+      this.db.collection<Question>('questions').add(questionToSave);
+    } else {
+      let id: string = questionToSave.id;
+      delete questionToSave.id;
+
+      this.db.doc<Question>('questions/' + id).update(questionToSave);
+    }
+    this.cancel();
   }
 
   reset(): void {

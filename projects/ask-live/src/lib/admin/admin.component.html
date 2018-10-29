@@ -1,6 +1,6 @@
 <h1 class="mat-h1">Administration</h1>
 
-<button mat-button class="mat-raised-button" (click)="openDialog()"><mat-icon>add</mat-icon> Add question...</button>
+<button mat-button class="mat-raised-button" (click)="create()"><mat-icon>add</mat-icon> Add question...</button>
 
 <mat-accordion>
     <mat-expansion-panel *ngFor="let question of questions | async">
@@ -13,13 +13,17 @@
         </mat-panel-description> -->
       </mat-expansion-panel-header>
       <mat-list>
-          <mat-list-item>{{question.answer1}}</mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>{{question.answer2}}</mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>{{question.answer3}}</mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>{{question.answer4}}</mat-list-item>
-        </mat-list>
+        <mat-list-item>{{question.answer1}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>{{question.answer2}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>{{question.answer3}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>{{question.answer4}}</mat-list-item>
+      </mat-list>
+      <mat-action-row>
+        <button mat-button (click)="delete(question)">Delete</button>
+        <button mat-button (click)="edit(question)">Edit</button>
+      </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
