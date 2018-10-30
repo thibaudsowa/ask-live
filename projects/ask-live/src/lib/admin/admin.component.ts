@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { Question } from '../shared/model/question';
 import { MatDialog } from '@angular/material';
-import { QuestionEditorComponent } from './question-editor/question-editor.component';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ConfirmService } from '../shared/confirm/confirm.service';
+import { Question } from '../shared/model/question';
+import { QuestionEditorComponent } from './question-editor/question-editor.component';
 
 @Component({
   selector: 'al-admin',
@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Question;
         const id = a.payload.doc.id;
-        return {id, ...data};
+        return { id, ...data };
       })));
   }
 
@@ -32,7 +32,7 @@ export class AdminComponent implements OnInit {
 
   create(): void {
     const dialogRef = this.dialog.open(QuestionEditorComponent, {
-      data: {type: 'new'}
+      data: { type: 'new' }
     });
   }
 
@@ -42,15 +42,15 @@ export class AdminComponent implements OnInit {
       description: 'Do you want to delete this questions?',
       failureButtonText: 'Cancel'
     }).subscribe(result => {
-      if(result) {
+      if (result) {
         this.db.doc('questions/' + question.id).delete();
       }
-    })
+    });
   }
 
   edit(question: Question) {
     const dialogRef = this.dialog.open(QuestionEditorComponent, {
-      data: {type: 'edit', question: Object.assign({}, question)}
+      data: { type: 'edit', question: Object.assign({}, question) }
     });
   }
 

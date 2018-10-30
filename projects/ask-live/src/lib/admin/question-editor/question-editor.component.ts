@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Question } from '../../shared/model/question';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Question } from '../../shared/model/question';
 
 @Component({
   selector: 'al-question-editor',
@@ -24,7 +24,7 @@ export class QuestionEditorComponent implements OnInit {
     this.title = this.type === 'new' ? 'New question' : 'Edit question';
     this.successButtonName = this.type === 'new' ? 'Add' : 'Edit';
 
-    if(this.type === 'edit') {
+    if (this.type === 'edit') {
       this.questionForm = data.question;
     }
   }
@@ -37,12 +37,12 @@ export class QuestionEditorComponent implements OnInit {
   }
 
   successButtonAction(): void {
-    let questionToSave: Question = Object.assign({}, this.questionForm);
+    const questionToSave: Question = Object.assign({}, this.questionForm);
 
-    if(this.type === 'new') {
+    if (this.type === 'new') {
       this.db.collection<Question>('questions').add(questionToSave);
     } else {
-      let id: string = questionToSave.id;
+      const id: string = questionToSave.id;
       delete questionToSave.id;
 
       this.db.doc<Question>('questions/' + id).update(questionToSave);

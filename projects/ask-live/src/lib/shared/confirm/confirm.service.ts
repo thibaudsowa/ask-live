@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material';
+import { Subject } from 'rxjs';
 import { ConfirmData } from './confirm-data';
 import { ConfirmComponent } from './confirm.component';
 
@@ -9,7 +9,7 @@ import { ConfirmComponent } from './confirm.component';
 })
 export class ConfirmService {
 
-  private dialogSubject:Subject<boolean> = new Subject();
+  private dialogSubject: Subject<boolean> = new Subject();
 
   constructor(public dialog: MatDialog) { }
 
