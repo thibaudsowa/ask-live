@@ -1,22 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { Question } from '../shared/model/question';
 import { SharedModule } from '../shared/shared.module';
 import { AdminComponent } from './admin.component';
+import { QuestionService } from './shared/question.service';
 
-xdescribe('AdminComponent', () => {
+describe('AdminComponent', () => {
   let component: AdminComponent;
   let fixture: ComponentFixture<AdminComponent>;
 
-  let angularFirestoreStub: Partial<AngularFirestore>;
-
-  angularFirestoreStub = {};
+  class QuestionServiceMock {
+    get() {
+      return new Observable<Question[]>();
+    }
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AdminComponent],
       imports: [SharedModule],
-      // TODO: externalize angularfire2 to mock it.
-      providers: [{ provide: AngularFirestore, useValue: angularFirestoreStub }]
+      providers: [{ provide: QuestionService, useClass: QuestionServiceMock }]
     })
       .compileComponents();
   }));
